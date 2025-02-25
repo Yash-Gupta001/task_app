@@ -4,7 +4,7 @@ import 'package:task_app/app/data/models/task.dart';
 import 'package:task_app/app/data/services/storage/repository.dart';
 
 class HomeController extends GetxController {
-   TaskRepository taskRepository;
+  final TaskRepository taskRepository;
 
   // Constructor to inject the repository
   HomeController({required this.taskRepository});
@@ -12,6 +12,7 @@ class HomeController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final editCtrl = TextEditingController();
   final chipIndex = 0.obs;
+  final deleting = false.obs;
   final tasks = <Task>[].obs;
 
   @override
@@ -21,14 +22,30 @@ class HomeController extends GetxController {
     ever(tasks, (_) => taskRepository.writeTasks(tasks));
   }
 
+  void changeDeleting(bool value) {
+    deleting.value = value;
+  }
+
   @override
   void onClose() {
+    editCtrl.dispose();
     super.onClose();
   }
 
-  void changeChipIndex(int value){
+  void changeChipIndex(int value) {
     chipIndex.value = value;
   }
 
-  
+  bool addTask(Task task) {
+    if (tasks.contains(task)) {
+      return false;
+    }
+    tasks.add(task);
+    return true;
+  }
+
+  // New method for deleting a task
+  void deleteTask(Task task) {
+    tasks.remove(task); 
+  }
 }
