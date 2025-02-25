@@ -37,15 +37,16 @@ class Home extends GetView<HomeController> {
                 children: [
                   ...controller.tasks
                       .map((element) => LongPressDraggable(
-                        data: element,
-                        onDragStarted: () => controller.changeDeleting(true),
-                        onDraggableCanceled: (___,__) => controller.changeDeleting(false),
-                        onDragEnd: (_) => controller.changeDeleting(false),
-
-                        feedback: Opacity(opacity: 0.8,
-                        child: TaskCard(task: element),
-                        ),
-                        child: TaskCard(task: element)))
+                          data: element,
+                          onDragStarted: () => controller.changeDeleting(true),
+                          onDraggableCanceled: (___, __) =>
+                              controller.changeDeleting(false),
+                          onDragEnd: (_) => controller.changeDeleting(false),
+                          feedback: Opacity(
+                            opacity: 0.8,
+                            child: TaskCard(task: element),
+                          ),
+                          child: TaskCard(task: element)))
                       .toList(),
                   AddCard()
                 ],
@@ -55,24 +56,23 @@ class Home extends GetView<HomeController> {
         ),
       ),
       floatingActionButton: DragTarget<Task>(
-  builder: (_, __, ___) {
-    return Obx( 
-      () => FloatingActionButton(
-        backgroundColor: controller.deleting.value ? Colors.red : Colors.blue,
-        onPressed: () {
-          // Add your logic for the button press if needed
+        builder: (_, __, ___) {
+          return Obx(
+            () => FloatingActionButton(
+              backgroundColor:
+                  controller.deleting.value ? Colors.red : Colors.blue,
+              onPressed: () {
+                // Add your logic for the button press if needed
+              },
+              child: Icon(controller.deleting.value ? Icons.delete : Icons.add),
+            ),
+          );
         },
-        child: Icon(controller.deleting.value ? Icons.delete : Icons.add),
+        onAccept: (Task task) {
+          controller.deleteTask(task);
+          EasyLoading.showSuccess("Delete done");
+        },
       ),
-    );
-  },
-  onAccept: (Task task) {
-    controller.deleteTask(task);
-    EasyLoading.showSuccess("Delete done");
-  },
-),
-
-        
     );
   }
 }
