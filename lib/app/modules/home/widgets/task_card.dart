@@ -20,12 +20,14 @@ class TaskCard extends StatelessWidget {
     // Calculate dynamic progress
     final totalSteps = 100; // This can be dynamically derived from your data
     final currentStep =
-        80; // Assuming `completedTodos` is a field in your task model
+        0; // Assuming `completedTodos` is a field in your task model
 
     return GestureDetector(
       onTap: () {
         homeCtrl.changeTask(task);
-        Get.to(() => DetailPage());
+        homeCtrl.changeTodos(task.todos ?? []);
+        Get.to(() => DetailPage(),
+        transition: Transition.rightToLeft,);
       },
       child: Container(
         width: squareWidth / 2,
