@@ -70,7 +70,7 @@ class TaskCard extends StatelessWidget {
                       color: color,
                       size: 24,
                     )
-                  : SizedBox(), // Placeholder if icon is null
+                  : SizedBox(), 
             ),
             Expanded(
               child: Padding(
