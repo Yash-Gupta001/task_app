@@ -18,16 +18,16 @@ class TaskCard extends StatelessWidget {
     final squareWidth = Get.width - 12.0.wp; // Width of the square card
 
     // Calculate dynamic progress
-    final totalSteps = 100; // This can be dynamically derived from your data
-    final currentStep =
-        0; // Assuming `completedTodos` is a field in your task model
+    final totalSteps = homeCtrl.isTodosEmpty(task) ? 1 : task.todos?.length ?? 0;
+    final currentStep = homeCtrl.isTodosEmpty(task) ? 0 : homeCtrl.getDoneTodo(task);
 
     return GestureDetector(
       onTap: () {
         homeCtrl.changeTask(task);
         homeCtrl.changeTodos(task.todos ?? []);
         Get.to(() => DetailPage(),
-        transition: Transition.rightToLeft,);
+          transition: Transition.rightToLeft,
+        );
       },
       child: Container(
         width: squareWidth / 2,
@@ -64,11 +64,13 @@ class TaskCard extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.all(6.0.wp),
-              child: Icon(
-                IconData(task.icon, fontFamily: 'MaterialIcons'),
-                color: color,
-                size: 24,
-              ),
+              child: task.icon != null
+                  ? Icon(
+                      IconData(task.icon, fontFamily: 'MaterialIcons'),
+                      color: color,
+                      size: 24,
+                    )
+                  : SizedBox(), // Placeholder if icon is null
             ),
             Expanded(
               child: Padding(

@@ -4,8 +4,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:task_app/app/data/services/storage/services.dart';
 import 'package:task_app/app/modules/home/binding.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:task_app/app/modules/splash/splash.dart';
 
-import 'app/modules/home/view.dart';
+// import 'app/modules/home/view.dart';
 
 void main() async {
   await GetStorage.init();
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Task app using getx',
-      home: Home(),
+      home: Splash(),
       initialBinding: HomeBinding(),
       builder: EasyLoading.init(),
     );

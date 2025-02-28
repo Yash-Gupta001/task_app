@@ -10,11 +10,14 @@ class DoingList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var task = homeCtrl.task.value;
+    final color = HexColor.fromHex(task!.color);
     return Obx(
       () {
         return homeCtrl.doingTodos.isEmpty && homeCtrl.doneTodos.isEmpty
             ? Column(
                 children: [
+                  SizedBox(height: 25.0.wp),
                   Image.asset(
                     'assets/images/task.webp',
                     fit: BoxFit.cover,
@@ -24,9 +27,11 @@ class DoingList extends StatelessWidget {
                     'Add Task',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16.0.wp,
+                      fontSize: 8.0.wp,
+                      color: color,
                     ),
                   ),
+                  SizedBox(height: 6.0.wp),
                 ],
               )
             : ListView(
@@ -45,21 +50,37 @@ class DoingList extends StatelessWidget {
                                   child: Checkbox(
                                     fillColor:
                                         MaterialStateProperty.resolveWith(
-                                            (states) => Colors.grey),
+                                            (states) => Colors.white),
                                     value: element['done'],
                                     onChanged: (bool? value) {
                                       homeCtrl.doneTodo(element['title']);
                                     },
                                   ),
                                 ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 4.0.wp),
-                                  child: Text(
-                                    element['title'],
-                                    overflow: TextOverflow.ellipsis,
+
+
+                                // Wrap text with Container or Flexible
+                                Flexible(
+                                  child: Container(
+                                    // constraints: BoxConstraints(
+                                    //   maxWidth: Get.width - 60.0.wp, // limit width for Text widget
+                                    // ),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(horizontal: 4.0.wp),
+                                      child: Text(
+                                        element['title'],
+                                        style: TextStyle(
+                                          fontSize: 14.0.sp,
+                                        ),
+                                        overflow: TextOverflow.ellipsis, // Adds ellipsis at the end if text overflows
+                                        maxLines: 10, // Limit text to 10 lines
+                                      ),
+                                    ),
                                   ),
                                 )
+
+
+                                
                               ],
                             ),
                           ))
