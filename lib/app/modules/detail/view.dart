@@ -121,6 +121,14 @@ class DetailPage extends StatelessWidget {
                 ),
               ),
               DoingList(),
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(vertical: 3.0.wp, horizontal: 4.0.wp),
+                child: Divider(
+                  thickness: 1.5,
+                  color: color,
+                ),
+              ),
               DoneList(),
               
             ],

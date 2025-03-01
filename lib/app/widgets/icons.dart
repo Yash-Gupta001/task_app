@@ -11,7 +11,7 @@ List<Icon> getIcons(){
   Icon(IconData(sportIcon, fontFamily: 'MaterialIcons'), color: yellow),
   Icon(IconData(travelIcon, fontFamily: 'MaterialIcons'), color: deepPink),
   Icon(IconData(shopIcon, fontFamily: 'MaterialIcons'), color: lightBlue),
-  Icon(IconData(foodIcon, fontFamily: 'MaterialIcons'), color: green),
+  Icon(IconData(foodIcon, fontFamily: 'MaterialIcons'), color: lavender),
 
  ];
 }

@@ -34,7 +34,11 @@ class TaskCard extends StatelessWidget {
         height: squareWidth / 2,
         margin: EdgeInsets.all(3.0.wp),
         decoration: BoxDecoration(
-          color: Colors.white,
+          gradient: LinearGradient(
+            colors: [Colors.white,color.withOpacity(0.3)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
@@ -49,6 +53,7 @@ class TaskCard extends StatelessWidget {
           children: [
             // StepProgressIndicator
             StepProgressIndicator(
+              roundedEdges: Radius.circular(10.0.wp),
               totalSteps: totalSteps,
               currentStep: currentStep,
               size: 5,
@@ -90,7 +95,7 @@ class TaskCard extends StatelessWidget {
                       '${task.todos?.length ?? 0} Task${(task.todos?.length ?? 0) > 1 ? 's' : ''}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey,
+                        color: Colors.grey[100],
                       ),
                     ),
                   ],
