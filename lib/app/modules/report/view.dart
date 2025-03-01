@@ -92,7 +92,6 @@ class ReportPage extends StatelessWidget {
                                   padding: 0,
                                   width: 90.0.wp, // Width of the circle
                                   height: 85.0.wp, // Height of the circle
-                                  selectedStepSize: 15, // Size of selected step
                                   roundedCap: (_, __) => true, // Make the step ends rounded
                                   child: Center(
                                     child: Text(
